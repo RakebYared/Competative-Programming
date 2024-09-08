@@ -1,12 +1,10 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        res = 0
+        count = 0
         store = defaultdict(int)
         for a in nums:
-            if store[a]!=0:
-                res+= store[a]
-                store[a]+=1
-            else:
-                store[a]=1
-
-        return res
+            store[a]+=1
+        for n in store.values():
+            count+= ((n-1)*n)//2
+        return count 
+        
