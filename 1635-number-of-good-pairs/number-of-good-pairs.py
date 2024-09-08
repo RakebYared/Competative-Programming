@@ -1,12 +1,12 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
         res = 0
-        i=0
-        while i<len(nums):
-            j=i+1
-            while j<len(nums):
-                if nums[i]==nums[j]:
-                    res+=1
-                j+=1
-            i+=1
+        store = defaultdict(int)
+        for a in nums:
+            if store[a]!=0:
+                res+= store[a]
+                store[a]+=1
+            else:
+                store[a]=1
+
         return res
