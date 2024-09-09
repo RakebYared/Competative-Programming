@@ -9,6 +9,8 @@ class Solution:
                 i += 1
             elif nums[i] == 1:
                 i += 1
+            elif i==r:
+                break
             else:
                 nums[i], nums[r] = nums[r], nums[i]
                 r -= 1
