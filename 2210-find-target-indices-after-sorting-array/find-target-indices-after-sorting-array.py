@@ -1,17 +1,19 @@
 class Solution:
     def targetIndices(self, nums: List[int], target: int) -> List[int]:
-        res = []
-        for i in range(len(nums)):
-            minindex = i
-            for j in range(i+1,len(nums)):
-                if nums[j]<nums[minindex]:
-                    minindex = j
-                    
-            if minindex!=i:
-                nums[i], nums[minindex] = nums[minindex], nums[i]
-            if nums[i] == target:
-                res.append(i)
-        return res
+        res = [0]
+        count = 0
+        for a in nums:
+            if a<target:
+                res[0] += 1
+            if a==target:
+                count+=1
+        for _ in range(1,count):
+            res.append(res[-1]+1)
+        return res if count!=0 else []
+
+
+                
+
 
 
 
