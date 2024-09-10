@@ -1,9 +1,9 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
         c = 0
-        st = defaultdict(int)
+        sto = defaultdict(int)
         for a in nums:
-            st[a]+=1
-            c += st[a]-1
+            sto[a]+=1
+            c += sto[a]-1
         return c
         
