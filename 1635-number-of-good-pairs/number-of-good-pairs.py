@@ -4,7 +4,6 @@ class Solution:
         store = defaultdict(int)
         for a in nums:
             store[a]+=1
-        for n in store.values():
-            c+= ((n-1)*n)//2
+            c += store[a]-1
         return c
         
