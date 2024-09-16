@@ -1,6 +1,6 @@
 class Solution:
     def trap(self, h: List[int]) -> int:
-        l, r, add, con= 0, len(h)-1, 0, 0
+        l, r, add= 0, len(h)-1, 0
         while l<r:
             con = min(h[l],h[r])
             while l<r:
