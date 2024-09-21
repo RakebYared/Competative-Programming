@@ -4,10 +4,16 @@ class Solution:
         while l<=r:
             mid = (l+r)//2
             if target>=matrix[mid][0] and target<=matrix[mid][-1]:
-                if target in matrix[mid]:
-                    return True
-                else: 
-                    break
+                l,r=0,len(matrix[mid])
+                while l<=r:
+                    midmid= (l+r)//2
+                    if matrix[mid][midmid]>target:
+                        r=midmid-1
+                    elif matrix[mid][midmid]<target:
+                        l=midmid+1
+                    else:
+                        return True
+                break    
             elif target<matrix[mid][0] and target<matrix[mid][-1]:
                 r=mid-1
             else:
