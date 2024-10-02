@@ -6,4 +6,6 @@ class Solution:
             while i<len(result) and i<len(word) and result[i]==word[i]:
                 i+=1
             if i<len(result): result = result[:i]
+            if not result:
+                return ""
         return result
