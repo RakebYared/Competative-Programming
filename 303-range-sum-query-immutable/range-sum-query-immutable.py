@@ -2,13 +2,11 @@ class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums = nums
-        
+        for i in range(1,len(self.nums)):
+            self.nums[i] += self.nums[i-1]
 
     def sumRange(self, left: int, right: int) -> int:
-        add = 0
-        for i in range(left,right+1):
-            add += self.nums[i]
-        return add
+        return self.nums[right] if left==0 else self.nums[right]-self.nums[left-1]
 
 
         
