@@ -5,13 +5,10 @@ class Solution:
                 if s[i] != s[len(s)-i-1]:
                     return False
             return True
-        res = s[0]
-        for i in range(len(s)-1):
-            j = len(s)-1
-            while j>i and j-i+1>len(res):
-                if ispalindrom(s[i:j+1]):
-                    res = s[i:j+1]
-                    break
-                j-=1
-           
-        return res
+        k = len(s)
+        while k>1:
+            for i in range(len(s)-k+1):
+                if ispalindrom(s[i:i+k]):
+                    return s[i:i+k]
+            k-=1
+        return(s[0])
