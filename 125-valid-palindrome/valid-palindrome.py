@@ -7,17 +7,13 @@ class Solution:
                 return True
             else:
                 return False
-        l = 0
-        r = len(s)-1
+        
+        
+        s = list(val for val in s if alp(val))
+        l, r = 0, len(s)-1
         while l<r:
-            while not alp(s[l]) and l<r:
-                l+=1
-            while not alp(s[r]) and l<r:
-                r-=1
-            if l<r and s[l].lower()!= s[r].lower():
+            if s[l].lower() != s[r].lower():
                 return False
-            else:
-                l+=1
-                r-=1
+            l+=1
+            r-=1
         return True
-       
