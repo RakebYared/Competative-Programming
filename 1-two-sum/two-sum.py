@@ -1,8 +1,9 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        store = dict()
+        store = {}
         for i in range(len(nums)):
-            if nums[i] in store:
-                return [store[nums[i]], i]
+            if store.get(nums[i], -1) >= 0:
+                return [i, store[nums[i]]]
             store[target-nums[i]] = i
+            
         
