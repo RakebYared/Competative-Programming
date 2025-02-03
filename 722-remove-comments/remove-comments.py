@@ -1,29 +1,29 @@
 class Solution:
     def removeComments(self, source: List[str]) -> List[str]:
-        ans = []
-        inmulti = False
-        s = ""
+        is_multi = False
+        res = []
         for line in source:
             i = 0
+            if not is_multi:
+                not_comment = []
             while i < len(line)-1:
-                if not inmulti:
-                    if line[i] == '/' and line[i+1]=="/":
+                if not is_multi:
+                    if line[i] == '/' and line[i+1] == '/': 
                         break
-                    elif line[i] == "/" and line[i+1]=="*":
-                        i += 1
-                        inmulti = True    
-                    else: s+= line[i]
+                    elif line[i] == '/' and line[i+1] == '*':
+                        i+=1
+                        is_multi = True
+                    else:
+                        not_comment.append(line[i])
+                i+=1
+                while is_multi and i<len(line)-1:
+                    if line[i] == '*' and line[i+1] == '/':
+                        is_multi = False
+                        i+=1
                     i+=1
-                while inmulti and i<len(line)-1:
-                    if line[i] == '*' and line[i+1]=="/":
-                        i+=2
-                        inmulti = False
-                        break
-                    i+=1
-            if not inmulti and i == len(line)-1:
-                s+=line[i]
-            if not inmulti and s: 
-                ans.append(s) 
-                s = ""
-        return ans
-    
+            if not is_multi:
+                if i == len(line)-1:
+                    not_comment.append(line[i])
+                if not_comment: 
+                    res.append(''.join(not_comment))
+        return res
