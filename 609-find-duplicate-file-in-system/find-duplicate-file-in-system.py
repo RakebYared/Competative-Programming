@@ -1,19 +1,19 @@
 class Solution:
     def findDuplicate(self, paths: List[str]) -> List[List[str]]:
+
         store = defaultdict(list)
-        ans = []
-        for dire in paths:
-            parent, files = dire.split(" ")[0],dire.split(" ")[1:] 
-            for a in files:
-                file, content = a.split("(")
-                content = content[:-1]
-                store[content].append(parent + "/" + file)
-        for a in store:
-            if len(store[a])>1:
-                ans.append(store[a])
-        return ans
 
-
-
+        for path in paths:
+            path = path.split()
+            dire = path[0]
+            for files in path[1:]:
+                file_name, content = files.split('(')
+                store[content].append(dire +'/'+file_name)
+            
+            res = []
+            for key in store:
+                if len(store[key]) > 1:
+                    res.append(store[key])
+        return res
 
         
