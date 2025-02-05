@@ -1,9 +1,15 @@
 class Solution:
     def rearrangeArray(self, nums: List[int]) -> List[int]:
-        nums.sort(key = lambda x: float('infinity') if x<0 else -float('infinity'))
         ans = []
-        mid = len(nums)//2
-        for i in range(mid):
-            ans.append(nums[i])
-            ans.append(nums[i+mid])
-        return ans        
+        n, p= 0, 0
+        while len(ans) != len(nums):
+            while nums[p]<0:
+                p+=1
+            ans.append(nums[p])
+            p+=1
+            while nums[n]>0:
+                n+=1
+            ans.append(nums[n])
+            n+=1
+        return ans
+       
