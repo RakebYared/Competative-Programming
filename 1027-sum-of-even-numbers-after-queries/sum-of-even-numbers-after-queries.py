@@ -1,17 +1,5 @@
 class Solution:
     def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
-        '''
-        if val is odd: 
-            if num is even:
-                total -= num
-            else:
-                total += val+num
-        else:
-            if num is even:
-                total += val
-            else:
-                total -= num
-        '''
         val, index = queries[0]
         nums[index] += val
         ans = [sum([num for num in nums if not num%2])]
