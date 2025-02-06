@@ -1,17 +1,32 @@
 class Solution:
-    def isValidSudoku(self, board: List[List[str]]) -> bool: 
-        row = {a:[0]*9 for a in range(9)}
-        col = {a:[0]*9 for a in range(9)}
-        square = defaultdict(list)
-        for i in range(9):
-            for j in range(9):
-                if board[i][j] == '.':
-                    continue
-                board[i][j] = int(board[i][j])
-                if row[i][board[i][j]-1]==0 and col[j][board[i][j]-1]==0 and board[i][j] not in square[(i//3, j//3)]:  
-                    row[i][board[i][j]-1] = 1
-                    col[j][board[i][j]-1] = 1
-                    square[(i//3, j//3)].append(board[i][j])
-                else:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = {r : set() for r in range(9)}
+        cols = {c : set() for c in range(9)}
+        square = {s : set() for s in range(9)}
+
+        for row in rows:
+            for c in range(9):
+                if board[row][c]!='.' and board[row][c] in rows[row]:
                     return False
+                else:
+                    rows[row].add(board[row][c])
+        
+        for col in cols:
+            for r in range(9):
+                if board[r][col] != '.' and board[r][col] in cols[col]:
+                    return False
+                else:
+                    cols[col].add(board[r][col])
+
+        
+        for r in range(9):
+            for c in range(9):
+                sq = (r//3)*3 + c//3
+                if board[r][c] != '.' and board[r][c] in square[sq]:
+                    return False   
+                else:
+                    square[sq].add(board[r][c])
+        
         return True
+
+        
