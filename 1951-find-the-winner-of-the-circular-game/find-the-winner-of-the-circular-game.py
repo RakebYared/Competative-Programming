@@ -6,14 +6,7 @@ class Solution:
 
         while len(nums) > 1:
             out = (i+k)% len(nums)
-            if out == 0:
-                nums = nums[1:]
-                i = 0
-            elif out == len(nums)-1:
-                nums = nums[:len(nums)-1]
-                i = 0
-            else:
-                nums = nums[:out] + nums[out+1:]
-                i = out
+            i = out
+            nums.pop(out)
         return nums[0]
             
