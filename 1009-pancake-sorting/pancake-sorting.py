@@ -1,16 +1,34 @@
 class Solution:
     def pancakeSort(self, arr: List[int]) -> List[int]:
-        order = {x:y for y,x in enumerate(sorted(arr))}
-        k = []
-        for key in list(order.keys())[::-1]:
-            if arr == list(order.keys()):
-                return k
-            for i in range(len(arr)):
-                if arr[i] == key:
-                    if i == order[key]:
-                        break
-                    else:
-                        k.append(i+1)
-                        k.append(order[key]+1)
-                        arr[:i+1] = reversed(arr[:i+1])
-                        arr[:order[key]+1] = reversed(arr[:order[key]+1])
+        '''
+
+        '''
+        store = {}
+        n = len(arr)
+
+        for i in range(len(arr)):
+            store[arr[i]] = i
+        
+        ans = []
+        for num in range(n,0,-1):
+            if store[num] == num-1:
+                continue 
+
+            k = store[num] + 1
+            ans.append(k)
+            for key in store:
+                if store[key] < k:
+                    store[key] = k -1 - store[key]
+            
+            k = num
+            ans.append(k)
+
+            for key in store:
+                if store[key] < k:
+                    store[key] = k -1 - store[key]
+                    
+        return ans
+
+
+
+        
