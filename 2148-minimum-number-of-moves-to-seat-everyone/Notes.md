@@ -1,0 +1,1 @@
+<h2>minimum-number-of-moves-to-seat-everyone Notes</h2><hr>[ Time taken: 7 m 37 s ]
