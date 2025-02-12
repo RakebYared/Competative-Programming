@@ -1,12 +1,19 @@
 class Solution:
-    def dividePlayers(self, nums: List[int]) -> int:
-        nums.sort()
-        chem = 0 
-        teamSum = nums[0] + nums[-1]
-        for i in range(len(nums)//2):
-            if nums[i] + nums[len(nums)-1-i] != teamSum:
-                return -1
-            chem += (nums[i]*nums[len(nums)-1-i])
-        return chem
+    def dividePlayers(self, skill: List[int]) -> int:
+        skill.sort()
+        l, r = 0, len(skill)-1
+        total_chemistry = 0
 
+        team = skill[r] + skill[l]
+
+        while l<r:
+            if skill[r] + skill[l] != team:
+                return -1
+            
+            total_chemistry += skill[r] * skill[l]
+
+            l += 1
+            r -= 1
         
+        return total_chemistry
+
