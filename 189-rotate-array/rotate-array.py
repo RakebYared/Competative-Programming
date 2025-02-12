@@ -4,23 +4,8 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
-        start = 0
-        i = 0
-        swaps = 0
+        moved = k % n
 
-        while i < n and swaps <= n:
-            temp = nums[i]
-            j = (i + k) % n
-
-            while j != start and swaps < n:
-                j = (i + k) % n
-                nums[j], temp = temp, nums[j]
-                i = j 
-                swaps += 1
-            
-            start += 1
-            i = start
-
-            # nums[j] = temp
-
-
+        ans = nums[n-moved: n] + nums[0 : n - moved]
+        for i in range(n):
+            nums[i] = ans[i]
