@@ -1,13 +1,18 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        ps = [0]*(len(s)+1)
-        for st,e,d in shifts:
-            ps[st] += d or -1
-            ps[e+1] -= d or -1
+        prefix = [0] * (len(s) + 1)
 
-        res = "" 
+        for start, end, direction in shifts:
+            prefix[start] += direction or -1
+            prefix[end + 1] -= direction or -1
+
+        for i in range(1, len(s)):
+            prefix[i] += prefix[i-1]
+       
+        ans = []
         for i in range(len(s)):
-            if i!=0: ps[i] += ps[i-1]
-            res+= chr(((ord(s[i])-ord('a')+ps[i])%26)+ord('a'))
-        return res
+            code = (ord(s[i]) + prefix[i] - 97) % 26
+            ans.append(chr(code + 97))
+        
+        return ''.join(ans)
         
