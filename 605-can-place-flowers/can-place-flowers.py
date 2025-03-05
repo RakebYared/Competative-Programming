@@ -1,16 +1,19 @@
 class Solution:
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        flag = False
+        count = 0
 
-        zeros = [1]
         for f in flowerbed:
             if f:
-                zeros.append(0)
+                if flag:
+                    count -= 1
+                flag = True
+
+            elif flag:
+                flag =  False
+
             else:
-                zeros[-1] += 1
-        
-        zeros[-1] += 1
-        
-        for z in zeros:
-            n -= (z-1)//2
-        
-        return True if n <= 0 else False
+                count += 1
+                flag = True
+            
+        return True if count >= n else False
