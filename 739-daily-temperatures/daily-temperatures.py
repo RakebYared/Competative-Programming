@@ -1,11 +1,15 @@
 class Solution:
-    def dailyTemperatures(self, t: List[int]) -> List[int]:
+    def dailyTemperatures(self, temperature: List[int]) -> List[int]:
+        store = defaultdict(int)
         stack = []
-        answer = [0] * len(t)
-        for i in range(len(t)):
-            while stack and t[i] > t[stack[-1]]:
-                index = stack.pop()
-                answer[index] = i - index
+        n = len(temperature)
+
+        for i in range(n):
+            while stack and temperature[stack[-1]] < temperature[i]:
+                store[stack.pop()] = i - stack[-1]
             stack.append(i)
-    
-        return answer
+        
+        ans = [store[i] for i in range(n)]
+        return ans
+
+        
