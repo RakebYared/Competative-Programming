@@ -13,10 +13,6 @@ class Solution:
                 return search(node.right)
             elif node.val > q.val and node.val > p.val:
                 return search(node.left)
-            elif node.val == q.val:
-                return q
-            elif node.val == p.val:
-                return p
             else:
                 return node
         
