@@ -11,7 +11,7 @@ class Solution:
                 create(val + [nums[i]], nums[i+1:])
             
         create([],nums)
-        return sorted(ans)
+        return ans
                 
 
 
