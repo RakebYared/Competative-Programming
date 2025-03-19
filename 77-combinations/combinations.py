@@ -4,11 +4,13 @@ class Solution:
 
         def compute(val, num):
             if len(val) == k:
-                ans.append(val)
+                ans.append(val.copy())
                 return
 
             for num in range(num, n+1):
-                compute(val+[num], num+1)
+                val.append(num)
+                compute(val, num+1)
+                val.pop()
         
         compute([], 1)
         return ans
