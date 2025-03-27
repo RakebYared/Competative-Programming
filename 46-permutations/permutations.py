@@ -8,7 +8,7 @@ class Solution:
             if len(val) == n:
                 ans.append(val.copy())
             
-            nums = list(store)
+            nums = store.copy()
 
             for num in nums:
                 store.remove(num)
