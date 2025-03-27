@@ -7,6 +7,7 @@ class Solution:
         def compute(val, store):
             if len(val) == n:
                 ans.append(val.copy())
+                return 
             
             nums = store.copy()
 
