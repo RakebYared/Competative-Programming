@@ -6,26 +6,19 @@
 #         self.right = right
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        store = deque()
 
-        def moveright(node, toggle):
-            nonlocal store
+        def reverse(node1, node2, flag):
 
-            if node:
-                if toggle:
-                    store.append(node.val)
-                moveright(node.right, not toggle)
-                moveright(node.left, not toggle )
-            
-        def moveleft(node, toggle):
-            if node:
-                if toggle:
-                    node.val = store.popleft()
-                moveleft(node.left, not toggle)
-                moveleft(node.right, not toggle)
+            if not node1:
+                return
 
-        moveright(root, False)
-        moveleft(root, False)
+            if flag:
+                node1.val,  node2.val = node2.val, node1.val
 
+            reverse(node2.right, node1.left, not flag)
+            reverse(node1.right, node2.left, not flag)
+
+        reverse(root.left, root.right, True)
         return root
+
         
