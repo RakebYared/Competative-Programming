@@ -7,9 +7,6 @@ class Solution:
             
             ans.append(store.copy())
 
-            if i == n:
-                return 
-
             for i in range(i, n):
                 store.append(nums[i])
                 create(store, i + 1)
