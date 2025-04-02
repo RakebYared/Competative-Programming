@@ -1,20 +1,25 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        ans = [[]]
+        ans = []
+        n = len(nums)
 
-        def create(val, nums):
-            if not nums:
+        def create(store, i):
+            if i > n:
                 return 
-
-            for i in range(len(nums)):
-                ans.append(val + [nums[i]])
-                create(val + [nums[i]], nums[i+1:])
             
-        create([],nums)
+            ans.append(store.copy())
+
+            for i in range(i, n):
+                store.append(nums[i])
+                create(store, i + 1)
+                store.pop()
+
+        create([],0)
         return ans
+
+        
+
+
+            
                 
 
-
-            
-        
-        
