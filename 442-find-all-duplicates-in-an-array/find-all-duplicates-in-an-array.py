@@ -1,9 +1,24 @@
 class Solution:
     def findDuplicates(self, nums: List[int]) -> List[int]:
-        not_dup = set()
-        for num in nums:
-            if num not in not_dup:
-                not_dup.add(num)
+
+        i = 0
+        n = len(nums)
+        ans = []
+
+        while i < n:
+
+            if nums[i] != i + 1:
+                new_ind = nums[i] - 1
+
+                if nums[new_ind] == nums[i]:
+                    i += 1
+                else:
+                    nums[i], nums[new_ind] = nums[new_ind], nums[i]
             else:
-                not_dup.remove(num)
-        return list(set(nums)-not_dup)
+                i += 1
+        
+        for i in range(n):
+            if nums[i] != i + 1:
+                ans.append(nums[i])
+        
+        return ans
