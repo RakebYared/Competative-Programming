@@ -4,10 +4,11 @@ class Solution:
         n = len(nums)
 
         def create(store, i):
-            if i > n:
-                return 
             
             ans.append(store.copy())
+
+            if i == n:
+                return 
 
             for i in range(i, n):
                 store.append(nums[i])
