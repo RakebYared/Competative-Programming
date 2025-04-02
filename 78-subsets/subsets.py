@@ -4,13 +4,14 @@ class Solution:
         n = len(nums)
 
         def create(store, i):
-            
-            ans.append(store.copy())
+            if i == n:
+                ans.append(store.copy())
+                return 
 
-            for i in range(i, n):
-                store.append(nums[i])
-                create(store, i + 1)
-                store.pop()
+            store.append(nums[i])
+            create(store, i + 1)
+            store.pop()
+            create(store, i + 1)
 
         create([],0)
         return ans
