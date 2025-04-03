@@ -12,7 +12,7 @@ class Solution:
             nonlocal ans
 
             if not node:
-                return -float('inf')
+                return 0
 
             left = traverse(node.left)
             right = traverse(node.right)
