@@ -2,54 +2,49 @@ class Solution:
     def isAdditiveNumber(self, num: str) -> bool:
         n = len(num)
 
-        def compute(start, flag, num1, num2):        
+        def compute(start, num1, num2):
+
             if start == n:
                 return True
 
-            i = start
             total = 0
-            ans = False
-
-            while i < n:
+            for i in range(start, n):
 
                 total *= 10
                 total += int(num[i])
-                print(total)
-                
-                if i > start and num[start]=='0':
-                    break
 
-                if flag == 2:  
-                    if (n - i) > max(2, i - start):
-                        ans = compute(i+1, flag - 1, total, num2)
+                if i > start and num[start] == '0':
+                    return False
 
-                elif flag == 1:
-                    if (n - i) > max(1, i - start):
-                        ans = compute(i+1, flag - 1 , num1,total)
-
-                else:
-                  
-                    if total > num1 + num2:
-                        return False
-                    elif total < num1 + num2:
-                        pass
-
-                    else:
-                        ans = compute(i+1,flag - 1,num2,total)
-                i += 1
-                if ans:
+                if total == num1 + num2 and compute(i+1, num2, total):
                     return True
-            
+                elif total < num1 + num2:
+                    continue 
+                else:
+                    return False
+
             return False
 
-        return compute(0,2,0,0)
+
+
+        for i in range(n):
+            if i > 0 and num[0] == '0':
+                break
+
+            for j in range(i+1, n-1):
+                if j>i+1 and num[i+1] == '0':
+                    break
+                
+                print(num[:i+1], num[i+1:j+1], j+1)
+
+                if compute(j+1, int(num[:i+1]), int(num[i+1:j+1])):
+                    return True
+
+        return False
 
 
 
-
-
-
-
+       
 
 
 
