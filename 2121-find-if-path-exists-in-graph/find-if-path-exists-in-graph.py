@@ -11,10 +11,8 @@ class Solution:
 
             visited.add(node)
             for n in store[node]:
-                if n == source and destination in visited:
-                    return True
-                
-                if n == destination and source in visited:
+    
+                if n == destination:
                     return True
 
                 if n not in visited and dfs(n, visited):
@@ -25,4 +23,4 @@ class Solution:
         if source == destination:
             return True
 
-        return dfs(0, set())
+        return dfs(source, set())
