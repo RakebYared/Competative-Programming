@@ -2,36 +2,42 @@ class Solution:
 
     def islandPerimeter(self, grid: List[List[int]]) -> int:
 
-        row_length, col_length = len(grid), len(grid[0])
-        visited = [[0]*col_length for _ in range(row_length)]
+        row_len, col_len = len(grid), len(grid[0])
 
-        direction = [(0,1), (1,0), (0,-1), (-1,0)]
+        direction = [(1,0), (-1,0), (0,1), (0,-1)]
 
-        def inbound(r, c):            
-            return 0 <= r < row_length and 0 <= c < col_length
+        visited = [[0]*col_len for _ in range(row_len)]
+
+        def inbound(row, col):
+            return 0 <= row < row_len and 0 <= col < col_len
         
-        ans = 0
-        
-        def dfs(row, col):
-            nonlocal ans
+        def dfs(stack):
+            ans = 0
 
-            visited[row][col] = 1
+            while stack:
+                row, col = stack.pop()
 
-            for r, c in direction:
-                new_row, new_col = row + r, col + c
+                for r, c in direction:
+                    new_row, new_col = row + r, col + c
 
-                if not inbound(new_row, new_col):
-                    ans += 1
-                
-                elif not visited[new_row][new_col]: 
-                    if grid[new_row][new_col]:
-                        dfs(new_row, new_col)
-                    else:
+                    if not inbound(new_row, new_col):
                         ans += 1
-        
-        for i in range(row_length):
-            for j in range(col_length):
-                if grid[i][j]:
-                    dfs(i,j)
-                    return ans
+                    elif not grid[new_row][new_col]:
+                        ans += 1
 
+                    elif not visited[new_row][new_col]:
+                        visited[new_row][new_col] = 1
+                        stack.append([new_row, new_col])
+
+            return ans
+            
+        
+        for r in range(row_len):
+            for c in range(col_len):
+                if grid[r][c]:
+                    visited[r][c] = 1
+                    return dfs([[r, c]])
+
+         
+
+       
