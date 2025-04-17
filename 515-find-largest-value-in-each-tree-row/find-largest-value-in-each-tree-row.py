@@ -7,30 +7,16 @@
 class Solution:
     def largestValues(self, root: Optional[TreeNode]) -> List[int]:
 
-        ans = []
+        store = defaultdict(lambda : -float('inf'))
 
-        q = deque()
+        def traverse(node, level):
+
+            if node:
+                store[level] = max(node.val, store[level])
+                traverse(node.right, level + 1)
+                traverse(node.left, level + 1)
         
-        if root:
-            q.append(root)
+        traverse(root, 0)
+        return list(store.values())
 
-        while q:
-
-            n = len(q)
-            maxx = max(q, key = lambda x: x.val)
-            ans.append(maxx.val)
-
-            for _ in range(n):
-                node = q.popleft()
-
-                if node.right:
-                    q.append(node.right)
-
-                if node.left:
-                    q.append(node.left)
-        
-        return ans
-
-
-
-        
+            
