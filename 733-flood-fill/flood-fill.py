@@ -10,28 +10,27 @@ class Solution:
 
         original = image[sr][sc]
 
-        q = deque()
+        q = []
         q.append([sr, sc])
 
         vis = [[0]*len_c for _ in range(len_r)]
         vis[sr][sc] = 1
 
         while q:
-            n = len(q)
-            for _ in range(n):
-                row, col = q.popleft()
-                image[row][col] = color
+            
+            row, col = q.pop()
+            image[row][col] = color
 
-                for r,c in direction:
+            for r,c in direction:
 
-                    new_r, new_c= row + r, col + c
+                new_r, new_c= row + r, col + c
 
-                    if not inbound(new_r, new_c):
-                        continue
+                if not inbound(new_r, new_c):
+                    continue
 
-                    if not vis[new_r][new_c] and image[new_r][new_c] == original:
-                        q.append([new_r, new_c])
-                        vis[new_r][new_c] = 1
+                if not vis[new_r][new_c] and image[new_r][new_c] == original:
+                    q.append([new_r, new_c])
+                    vis[new_r][new_c] = 1
 
         return image
 
