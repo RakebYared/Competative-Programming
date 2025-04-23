@@ -2,41 +2,33 @@ class Solution:
     def findOrder(self, n: int, prerequisites: List[List[int]]) -> List[int]:
 
         graph = [[] for _ in range(n)]
-        in_degree = [0]*n
+        vis = ['']*n
+
         ans = []
 
         for a, b in prerequisites:
             graph[b].append(a)
-            in_degree[a] += 1
 
-        queue = deque()
 
-        for node in range(n):
-            if not in_degree[node]:
-                queue.append(node)
-                
-
-        
-        while queue:
-            node = queue.popleft()
-            ans.append(node)
+        def dfs(node):
+            nonlocal ans
+            
+            vis[node] = 'G'
             
             for nei in graph[node]:
-                in_degree[nei] -= 1
+                
+                if vis[nei] == 'G':
+                    return False
+                
+                if not vis[nei] and not dfs(nei):
+                    return False
 
-                if not in_degree[nei]:
-                    queue.append(nei)
+            ans.append(node)
+            vis[node] = 'B'
+            return True
 
+        for node in range(n):
+            if not vis[node] and not dfs(node):
+                return []
         
-        return ans if len(ans) == n else []
-
-
-        
-
-
-        
-
-
-        
-
-        
+        return ans[::-1]
