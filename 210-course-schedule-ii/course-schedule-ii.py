@@ -7,7 +7,7 @@ class Solution:
         ans = []
 
         for a, b in prerequisites:
-            graph[b].append(a)
+            graph[a].append(b)
 
 
         def dfs(node):
@@ -31,4 +31,4 @@ class Solution:
             if not vis[node] and not dfs(node):
                 return []
         
-        return ans[::-1]
+        return ans
