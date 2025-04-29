@@ -4,17 +4,22 @@ class KthLargest:
 
         self.k = k
         nums.sort()
+
         n = len(nums)
-        if n > k:
-            self.nums = nums[n-k:]
-        else:
-            self.nums = nums
-        
+
+        if k < n:
+            nums = nums[n-k:]
+
+        self.nums = nums
+       
 
     def add(self, val: int) -> int:
+
         heappush(self.nums, val)
+
         if len(self.nums) > self.k:
             heappop(self.nums)
+
         return self.nums[0]
         
 
