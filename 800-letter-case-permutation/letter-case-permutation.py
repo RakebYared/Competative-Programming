@@ -1,25 +1,30 @@
 class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
+
+        m = 0
+        for letter in s:
+            if not letter.isdigit():
+                m += 1 
+
         ans = []
-        n = len(s)
+  
+        for num in range(1, 2**m):
+            val = []
 
-        def backtrack(store, start):
+            for letter in s:
+                if not letter.isdigit():
+                    if num & 1:
+                        val.append(letter.swapcase())
+                    else:
+                        val.append(letter)
 
-            if len(store) == n:
-                ans.append(''.join(store))
-                return
+                    num >>= 1
 
-            for i in range(start, n):
-                
-                store.append(s[i])
-                backtrack(store, i+1)
-                store.pop()
-
-                if not s[i].isdigit():
-                    store.append(s[i].swapcase())
-                    backtrack(store, i+1)
-                    store.pop()
-
-        backtrack([], 0)
+                else:
+                    val.append(letter)
+            
+            ans.append(''.join(val))
+            
+        ans.append(s)
         return ans
-        
+
